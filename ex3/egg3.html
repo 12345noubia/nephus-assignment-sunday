@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1d1d1d;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            background: #333;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            width: 300px;
+        }
+        .card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+        .card p {
+            margin: 5px 0;
+        }
+        .card .location {
+            color: #a3e635;
+            margin-bottom: 20px;
+        }
+        .card .bio {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .card .btn {
+            display: block;
+            background: #444;
+            color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .card .btn:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="c:\Users\Noubia Bilomia\Desktop\adobe illustrator\social-links-profile-main\assets\images\avatar-jessica.jpeg" alt="Profile Image">
+        <h2>Jessica Randall</h2>
+        <p class="location">London, United Kingdom</p>
+        <p class="bio">"Front-end developer and avid reader."</p>
+        <a href="#" class="btn">GitHub</a>
+        <a href="#" class="btn">Frontend Mentor</a>
+        <a href="#" class="btn">LinkedIn</a>
+        <a href="#" class="btn">Twitter</a>
+        <a href="#" class="btn">Instagram</a>
+    </div>
+</body>
+</html>

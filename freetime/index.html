@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo-style Dama Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('path/to/background.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        #gameContainer {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            background-color: #8a8a8a;
+            border: 10px solid #404040;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        .cell {
+            width: calc(100% / 8);
+            height: calc(100% / 8);
+            display: inline-block;
+            box-sizing: border-box;
+            border: 1px solid #404040;
+            background-color: #fff;
+            position: relative;
+            cursor: pointer;
+        }
+        .white {
+            background-color: #0ff040;
+        }
+        .black {
+            background-color: #e2aa10;
+        }
+        .piece {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none; /* Pieces initially hidden */
+        }
+        .player1 {
+            background-color: #f00; /* Red */
+        }
+        .player2 {
+            background-color: #00f; /* Blue */
+        }
+        #score {
+            text-align: center;
+            font-size: 24px;
+            color: #fff;
+            margin-top: 20px;
+        }
+        #controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Board will be generated dynamically -->
+    </div>
+    <div id="score">Score: 0</div>
+    <div id="controls">
+        <button id="moveLeft">Left</button>
+        <button id="moveRight">Right</button>
+        <button id="moveUp">Up</button>
+        <button id="moveDown">Down</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const boardSize = 8;
+            const boardContainer = document.getElementById('gameContainer');
+            const scoreDisplay = document.getElementById('score');
+            const moveLeftBtn = document.getElementById('moveLeft');
+            const moveRightBtn = document.getElementById('moveRight');
+            const moveUpBtn = document.getElementById('moveUp');
+            const moveDownBtn = document.getElementById('moveDown');
+
+            let currentPlayer = 1;
+            let score = 0;
+
+            // Game board setup
+            function createBoard() {
+                for (let row = 0; row < boardSize; row++) {
+                    for (let col = 0; col < boardSize; col++) {
+                        const cell = document.createElement('div');
+                        cell.classList.add('cell');
+                        if ((row + col) % 2 === 0) {
+                            cell.classList.add('white');
+                        } else {
+                            cell.classList.add('black');
+                        }
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        cell.addEventListener('click', handleCellClick);
+                        boardContainer.appendChild(cell);
+                    }
+                }
+            }
+
+            // Piece setup
+            function setupPieces() {
+                const cells = boardContainer.querySelectorAll('.cell');
+                const player1Pieces = [
+                    { row: 0, col: 1 },
+                    { row: 0, col: 3 },
+                    { row: 0, col: 5 },
+                    { row: 0, col: 7 },
+                    { row: 1, col: 0 },
+                    { row: 1, col: 2 },
+                    { row: 1, col: 4 },
+                    { row: 1, col: 6 }
+                ];
+                const player2Pieces = [
+                    { row: 6, col: 1 },
+                    { row: 6, col: 3 },
+                    { row: 6, col: 5 },
+                    { row: 6, col: 7 },
+                    { row: 7, col: 0 },
+                    { row: 7, col: 2 },
+                    { row: 7, col: 4 },
+                    { row: 7, col: 6 }
+                ];
+
+                player1Pieces.forEach(piece => {
+                    const cell = findCellByCoords(cells, piece.row, piece.col);
+                    if (cell) {
+                        const pieceEl = createPieceElement('player1');
+                        cell.appendChild(pieceEl);
+                    }
+                });
+
+                player2Pieces.forEach(piece => {
+                    const cell = findCellByCoords(cells, piece.row, piece.col);
+                    if (cell) {
+                        const pieceEl = createPieceElement('player2');
+                        cell.appendChild(pieceEl);
+                    }
+                });
+            }
+
+            function findCellByCoords(cells, row, col) {
+                return Array.from(cells).find(cell => cell.dataset.row === `${row}` && cell.dataset.col === `${col}`);
+            }
+
+            function createPieceElement(playerClass) {
+                const piece = document.createElement('div');
+                piece.classList.add('piece', playerClass);
+                return piece;
+            }
+
+            // Handle cell click event
+            function handleCellClick(event) {
+                const selectedCell = event.target;
+                const selectedPiece = selectedCell.querySelector('.piece');
+                if (selectedPiece) {
+                    // Implement movement logic here
+                    console.log('Piece clicked');
+                }
+            }
+
+            // Initialize game
+            function initGame() {
+                createBoard();
+                setupPieces();
+            }
+
+            initGame();
+        });
+    </script>
+</body>
+</html>
